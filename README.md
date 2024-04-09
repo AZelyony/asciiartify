@@ -1,0 +1,3 @@
+# AsciiArtify
+
+### for training purposes
