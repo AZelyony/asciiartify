@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: log-demo
+spec:
+  containers:
+  - name: logger
+    image: alpine:latest
+    command: ["sh", "-c", "i=0; while true; do echo 'Log message $i'; i=$((i+1)); sleep 1; done"]
+  - name: reader
+    image: alpine:latest
+    command: ["sh", "-c", "tail -f /logs/logfile"]
+    volumeMounts:
+    - name: log-volume
+      mountPath: /logs
+  volumes:
+  - name: log-volume
+    emptyDir: {}
+
+#kubectl logs log-demo -c reader
+#This will continuously display the log messages read by the reader container from the shared volume.
