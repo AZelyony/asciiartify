@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cronjob
+spec:
+  schedule: "*/1 * * * *"  # This will run the job every minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: my-cronjob-container
+            image: your-image:tag  # Replace with your image and tag
+            command: ["your", "command"]  # Replace with your command
+          restartPolicy: OnFailure
